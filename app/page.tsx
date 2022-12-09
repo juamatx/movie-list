@@ -1,13 +1,24 @@
-import Image from "next/image";
-import { moveEmitHelpers } from "typescript";
 import styles from "./page.module.css";
-import Movie from "./select_movie"
 
-export default function Home() {
+async function getMovie() {
+  const res = await fetch(
+    "https://y23xzzq934.execute-api.us-east-1.amazonaws.com/Prod/movie-of-the-week"
+  );
+
+  if (!res.ok) {
+    // This will activate the closest `error.js` Error Boundary
+    throw new Error("Failed to fetch data");
+  }
+
+  return res.json();
+}
+export default async function Home() {
+  const movie = await getMovie();
+
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-       <Movie />
+       <h1 className={styles.title}>{movie}</h1>
       </main>
     </div>
   );
