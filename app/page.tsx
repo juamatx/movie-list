@@ -16,7 +16,9 @@ export default async function Home() {
   return (
     <div className={styles.container}>
       <main className={styles.main}>
-        <h1 className={styles.title}>{movie}</h1>
+        <h1 className={styles.title}>
+          <a href={`https://www.google.com/search?q=${movie}`} target="_blank">{movie}</a>
+        </h1>
       </main>
     </div>
   );
